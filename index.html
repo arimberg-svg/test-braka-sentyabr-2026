@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Тест по браку · кто сдал</title>
+  <meta name="theme-color" content="#4208a8" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --p: #4208a8;
+      --p2: #5b21d6;
+      --orange: #f07a14;
+      --orange-deep: #c45e0a;
+      --paper: #ffffff;
+      --bg: #fff7ef;
+      --ink: #1a1033;
+      --muted: #5c5278;
+      --ok: #c45e0a;
+      --ok-deep: #8a3f08;
+      --ok-bg: #fff4e8;
+      --ok-line: #f0c08a;
+      --bad: #7b1fa2;
+      --bad-deep: #4a148c;
+      --bad-bg: #f6eefc;
+      --bad-line: #d4b8ef;
+      --warn: #c81e3a;
+      --warn-deep: #9b1530;
+      --warn-bg: #fdecee;
+      --warn-line: #f3b4bd;
+      --line: rgba(66, 8, 168, 0.16);
+      --font: "Manrope", "Segoe UI", sans-serif;
+      --display: "Geologica", "Manrope", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.45;
+    }
+    .glow {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(900px 420px at 8% -8%, rgba(240, 122, 20, 0.22), transparent 58%),
+        radial-gradient(700px 380px at 96% 0%, rgba(66, 8, 168, 0.16), transparent 55%),
+        linear-gradient(180deg, #ffffff 0%, #fff7ef 42%, #f3e8ff 100%);
+    }
+    .page {
+      position: relative; z-index: 1;
+      width: min(1120px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 22px 0 56px;
+    }
+    .postcard {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 18px 50px rgba(66, 8, 168, 0.08);
+    }
+    .hero {
+      position: relative;
+      padding: 28px 32px 26px;
+      background: linear-gradient(135deg, #4208a8 0%, #6b21c8 52%, #f07a14 100%);
+      color: #fff;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute; right: -40px; top: -50px;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+    }
+    .hero-top {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; position: relative; z-index: 1;
+    }
+    .brand { display: flex; align-items: center; gap: 14px; }
+    .brand img {
+      height: 42px; width: auto; display: block;
+      background: #fff; border-radius: 10px; padding: 6px 10px;
+    }
+    .chip {
+      font-size: 12px; font-weight: 800; letter-spacing: .1em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,.35);
+      padding: 7px 12px; border-radius: 999px;
+      white-space: nowrap;
+    }
+    .hero h1 {
+      position: relative; z-index: 1;
+      font-family: var(--display);
+      font-size: clamp(26px, 4.4vw, 40px);
+      line-height: 1.12; letter-spacing: -.03em;
+      margin: 22px 0 8px; font-weight: 800;
+    }
+    .hero p {
+      position: relative; z-index: 1;
+      margin: 0 0 16px; max-width: 68ch;
+      color: rgba(255,255,255,.9); font-weight: 600; font-size: 15px;
+    }
+    .links {
+      position: relative; z-index: 1;
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
+    .links a {
+      display: inline-flex; align-items: center;
+      background: #fff; color: var(--p);
+      font-weight: 800; font-size: 13px;
+      padding: 10px 14px; border-radius: 999px;
+      text-decoration: none;
+    }
+    .links a.ghost {
+      background: transparent; color: #fff;
+      border: 1px solid rgba(255,255,255,.4);
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(66, 8, 168, 0.12);
+    }
+    .stats article { background: #fff; padding: 16px 20px; }
+    .stats b {
+      display: block; font-family: var(--display);
+      font-size: 28px; letter-spacing: -.03em; line-height: 1;
+    }
+    .stats span { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; font-weight: 700; }
+    .stats .ok b { color: var(--orange); }
+    .stats .bad b { color: var(--p); }
+    .stats .warn b { color: var(--warn); }
+    .stats .p b { color: var(--p); }
+    .body { padding: 26px 28px 32px; }
+    .section-head {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 12px; margin: 8px 0 14px; flex-wrap: wrap;
+    }
+    .section-head h2 {
+      margin: 0; font-family: var(--display); font-size: 22px;
+      letter-spacing: -.02em; display: flex; align-items: center; gap: 10px;
+    }
+    .section-head p { margin: 0; color: var(--muted); font-size: 13px; font-weight: 650; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 10px;
+    }
+    .card {
+      position: relative;
+      border-radius: 16px;
+      padding: 14px 14px 12px 16px;
+      overflow: hidden;
+    }
+    .card.pass {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-line);
+      color: var(--ok-deep);
+    }
+    .card.warn {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-line);
+      color: var(--warn-deep);
+    }
+    .card .name {
+      font-family: var(--display);
+      font-size: 16px; font-weight: 700; letter-spacing: -.02em;
+      margin: 0 8px 4px 0;
+    }
+    .card .meta { margin: 0; font-size: 12px; font-weight: 700; opacity: .82; }
+    .card .score {
+      display: inline-flex; margin-top: 8px; margin-right: 6px;
+      font-size: 13px; font-weight: 800; letter-spacing: .02em;
+      background: #fff; border-radius: 999px;
+      padding: 4px 9px;
+      color: var(--orange-deep);
+      border: 1px solid var(--ok-line);
+    }
+    .card.warn .score {
+      color: var(--warn);
+      border-color: var(--warn-line);
+    }
+    .card .badge {
+      display: inline-flex; margin-top: 8px;
+      font-size: 11px; font-weight: 800; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--orange);
+    }
+    .card.warn .badge { color: var(--warn); }
+    .note {
+      margin: 0 0 16px;
+      background: #fff8f0;
+      border: 1px solid var(--ok-line);
+      color: var(--ok-deep);
+      border-radius: 16px;
+      padding: 12px 16px;
+      font-size: 13px; font-weight: 650;
+    }
+    .motivate {
+      margin: 8px 0 16px;
+      background: linear-gradient(135deg, #4208a8 0%, #5b21d6 58%, #7a3cff 100%);
+      color: #fff;
+      border-radius: 18px;
+      padding: 18px 20px;
+    }
+    .motivate h2 {
+      margin: 0 0 8px; font-family: var(--display); font-size: 20px;
+    }
+    .motivate p { margin: 0; font-weight: 600; font-size: 14.5px; line-height: 1.5; max-width: 74ch; }
+    .motivate a {
+      display: inline-block; margin-top: 12px;
+      background: #fff; color: var(--p);
+      font-weight: 800; font-size: 13px;
+      padding: 9px 14px; border-radius: 999px;
+      text-decoration: none;
+    }
+    .toolbar {
+      display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+      margin: 0 0 14px;
+    }
+    .toolbar input {
+      flex: 1 1 240px; font: inherit; font-size: 14px; font-weight: 650;
+      padding: 10px 14px; border: 1px solid var(--line); border-radius: 12px;
+    }
+    .store {
+      margin: 0 0 12px;
+      border: 1px solid var(--bad-line);
+      background: var(--bad-bg);
+      border-radius: 16px;
+      padding: 12px 14px 10px;
+    }
+    .store.hidden { display: none; }
+    .store-h {
+      display: flex; justify-content: space-between; gap: 10px; align-items: baseline;
+      margin-bottom: 8px;
+    }
+    .store-h b { font-family: var(--display); font-size: 15px; color: var(--bad-deep); }
+    .store-h span { font-size: 12px; font-weight: 800; color: var(--p); }
+    .names { display: flex; flex-wrap: wrap; gap: 6px; }
+    .names span {
+      background: #fff;
+      border: 1px solid var(--bad-line);
+      color: var(--bad-deep);
+      font-size: 13px; font-weight: 750;
+      padding: 5px 9px; border-radius: 999px;
+    }
+    footer {
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 12px; flex-wrap: wrap;
+      margin-top: 22px; color: var(--muted); font-size: 12px; font-weight: 650;
+    }
+    footer a { color: var(--p); font-weight: 800; }
+    .print-btn {
+      font: inherit; font-weight: 800; font-size: 13px;
+      background: var(--orange); color: #fff; border: 0;
+      padding: 9px 14px; border-radius: 999px; cursor: pointer;
+    }
+    @media (max-width: 720px) {
+      .hero, .body { padding-left: 18px; padding-right: 18px; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .chip { display: none; }
+    }
+    @media print {
+      .glow, .print-btn, .toolbar { display: none !important; }
+      body { background: #fff; }
+      .page { width: auto; margin: 0; padding: 0; }
+      .postcard { box-shadow: none; border: 0; border-radius: 0; }
+      .hero, .card, .motivate, .stats article, .store, .names span, .note {
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="page">
+    <article class="postcard">
+      <header class="hero">
+        <div class="hero-top">
+          <div class="brand">
+            <img src="assets/logo.png" alt="У Михалыча" />
+          </div>
+          <span class="chip">Норма 25 / 31</span>
+        </div>
+        <h1>Тест по браку:<br />кто сдал — и кому ещё надо</h1>
+        <p>
+          Сверка с списком СПК и ответственных за брак на 02.09.2026.
+          На карточке — балл из 31 и дата из письма, если она есть в выгрузке.
+          Если человек сдавал несколько раз — берём лучший результат.
+        </p>
+        <div class="links">
+          <a href="https://arimberg-svg.github.io/brak-test/">Сдать тест →</a>
+          <a class="ghost" href="https://arimberg-svg.github.io/brak-motivaciya-mihalych/">Мотивация по браку</a>
+        </div>
+      </header>
+
+      <div class="stats">
+        <article class="ok"><b id="pass-count">0</b><span>сдали (норма 25/31)</span></article>
+        <article class="warn"><b id="low-count">0</b><span>сдали, но ниже нормы</span></article>
+        <article class="bad"><b id="miss-count">0</b><span>не сдавали совсем</span></article>
+        <article class="p"><b>31</b><span>вопрос · письма 25.08–02.09</span></article>
+      </div>
+
+      <div class="body">
+        <div class="section-head">
+          <h2 style="color:#c45e0a">Сдали</h2>
+          <p>Оранжевые — набрали 25 и выше. Дата — из письма</p>
+        </div>
+        <p class="note">
+          Юрлова Ксения (Перевалово, 31/31) сверена со списком СПК как Серебренникова Ксения — тот же магазин и роль.
+          Одинцов и Кондратьева пересдавали: в карточке лучший балл.
+        </p>
+        <div id="passed" class="grid"></div>
+
+        <div class="section-head" style="margin-top:28px">
+          <h2 style="color:#c81e3a">Сдали, но не набрали норму</h2>
+          <p>Письмо есть, балл ниже 25 из 31</p>
+        </div>
+        <div id="low" class="grid"></div>
+
+        <div class="motivate">
+          <h2>Вас нет среди сдавших — это очень жаль</h2>
+          <p>
+            Тест по браку нужен тем, кто принимает товар и ведёт акты: СПК и ответственным за брак.
+            Ниже — фамилии из списка на 02.09.2026, по которым писем с результатом нет совсем.
+            Надо всё-таки сдать: это про деньги клиента, акты и ваш магазин.
+          </p>
+          <a href="https://arimberg-svg.github.io/brak-test/">Сдать тест по браку →</a>
+        </div>
+
+        <div class="section-head">
+          <h2 style="color:#4208a8">Не сдавали совсем</h2>
+          <p>Фиолетовые — СПК и ответственные за брак, кого нет в письмах</p>
+        </div>
+        <div class="toolbar">
+          <input id="q" type="search" placeholder="Поиск по фамилии или магазину…" autocomplete="off" />
+        </div>
+        <div id="missed"></div>
+
+        <footer>
+          <span>
+            Страница:
+            <a href="https://arimberg-svg.github.io/test-braka-sentyabr-2026/">arimberg-svg.github.io/test-braka-sentyabr-2026</a>
+            · тест:
+            <a href="https://arimberg-svg.github.io/brak-test/">brak-test</a>
+          </span>
+          <button class="print-btn" type="button" onclick="window.print()">Печать / PDF</button>
+        </footer>
+      </div>
+    </article>
+  </div>
+
+  <script>
+    const PASSED = [
+      { name: "Юрлова Ксения", store: "№20 · Перевалово", role: "СПК", score: "31/31", date: "", who: "Сдала", note: "в списке: Серебренникова Ксения" },
+      { name: "Кондратьева Ирина", store: "№22 · Ворошилова", role: "СПК", score: "31/31", date: "", who: "Сдала", note: "пересдача: было 20/31" },
+      { name: "Строкина Дарья", store: "№3 · Республики / №24 · Мальково", role: "СПК", score: "31/31", date: "", who: "Сдала" },
+      { name: "Одинцов Максим", store: "№11 · Березняки", role: "СПК", score: "30/31", date: "31.08.2026", who: "Сдал", note: "пересдача: было 25/31" },
+      { name: "Бучельников Алексей", store: "№9 · Червишево", role: "СПК", score: "30/31", date: "", who: "Сдал" },
+      { name: "Ключка Евгений", store: "№17 · Луговое", role: "СПК", score: "30/31", date: "", who: "Сдал" },
+      { name: "Бергер Леонид", store: "№11 · Березняки", role: "СПК / отв. за брак", score: "30/31", date: "", who: "Сдал" },
+      { name: "Шушарина Ольга", store: "№17 · Луговое", role: "Отв. за брак", score: "30/31", date: "", who: "Сдала" },
+      { name: "Кожевникова Ольга", store: "№15 · МСК 6 км", role: "Отв. за брак", score: "30/31", date: "", who: "Сдала" },
+      { name: "Егорова Ирина", store: "№20 · Перевалово", role: "СПК", score: "29/31", date: "02.09.2026", who: "Сдала" },
+      { name: "Лаговщина Ирина", store: "№14 · Боровский", role: "СПК", score: "29/31", date: "", who: "Сдала" },
+      { name: "Кочкуркин Никита", store: "№15 · МСК 6 км", role: "СПК", score: "29/31", date: "", who: "Сдал" },
+      { name: "Сердцова Мария", store: "№19 · Тюнёво", role: "СПК", score: "29/31", date: "", who: "Сдала" },
+      { name: "Никифоров Евгений", store: "№12 · Чайка", role: "СПК / отв. за брак", score: "29/31", date: "", who: "Сдал" },
+      { name: "Безуглов Иван", store: "№6 · Сантехника", role: "Отв. за брак", score: "29/31", date: "", who: "Сдал" },
+      { name: "Пузырёва Екатерина", store: "№19 · Тюнёво", role: "Отв. за брак", score: "28/31", date: "", who: "Сдала" },
+      { name: "Гитлайн Евгения", store: "№13 · Винзили", role: "СПК", score: "28/31", date: "", who: "Сдала" },
+      { name: "Окуньков Алексей", store: "№26 · Омская", role: "СПК / отв. за брак", score: "28/31", date: "", who: "Сдал" },
+      { name: "Узкоглазова Мария", store: "№12 · Чайка", role: "Кассир", score: "27/31", date: "31.08.2026", who: "Сдала", note: "не в списке СПК / отв. за брак" },
+      { name: "Вяткин Александр", store: "№28 · Талица", role: "СПК", score: "27/31", date: "", who: "Сдал" },
+      { name: "Сидоров Максим", store: "№28 · Талица", role: "СПК", score: "27/31", date: "", who: "Сдал" },
+      { name: "Головин Евгений", store: "№25 · Щорса", role: "СПК", score: "27/31", date: "", who: "Сдал" },
+      { name: "Сарана Олег", store: "№15 · МСК 6 км", role: "СПК", score: "27/31", date: "", who: "Сдал" },
+      { name: "Варлаков Данил", store: "№13 · Винзили", role: "Отв. за брак", score: "27/31", date: "", who: "Сдал" },
+      { name: "Мустюлёв Максим", store: "№3 · Республики", role: "Отв. за брак", score: "27/31", date: "", who: "Сдал" },
+      { name: "Белкина Наталья", store: "№14 · Боровский", role: "Отв. за брак", score: "26/31", date: "", who: "Сдала" },
+      { name: "Гольнев Сергей", store: "№24 · Мальково", role: "Отв. за брак", score: "26/31", date: "", who: "Сдал" },
+      { name: "Измайлов Иван", store: "№28 · Талица", role: "Отв. за брак", score: "26/31", date: "", who: "Сдал" },
+      { name: "Бандуровский Руслан", store: "№25 · Щорса", role: "Отв. за брак", score: "25/31", date: "", who: "Сдал" }
+    ];
+
+    const LOW = [
+      { name: "Катрич Константин", store: "№5 · Бабарынка", role: "СПК / отв. за брак", score: "24/31", date: "25.08.2026", who: "Не набрал норму" },
+      { name: "Конькова Валентина", store: "№18 · Решетникова", role: "СПК", score: "24/31", date: "", who: "Не набрала норму" },
+      { name: "Папушин Максим", store: "Офис", role: "Другое", score: "24/31", date: "", who: "Не набрал норму", note: "не в списке СПК / отв. за брак" },
+      { name: "Юрлов Игорь", store: "№21 · Успенка", role: "СПК / отв. за брак", score: "23/31", date: "", who: "Не набрал норму" }
+    ];
+
+    const STORES = [
+      { n: 1, title: "№1 · Дружбы 66", people: [
+        { name: "Абушева Яна", role: "СПК" },
+        { name: "Котков Сергей", role: "Отв. за брак" },
+        { name: "Диденко Любовь", role: "Отв. за брак" }
+      ]},
+      { n: 2, title: "№2 · Авторемонтная", people: [
+        { name: "Умарова Евдокия", role: "СПК" },
+        { name: "Кривенко Дмитрий", role: "Отв. за брак" }
+      ]},
+      { n: 7, title: "№7 · Ожогино", people: [
+        { name: "Булатов Артём", role: "СПК / отв. за брак" }
+      ]},
+      { n: 9, title: "№9 · Червишево", people: [
+        { name: "Топорищев Александр", role: "СПК" },
+        { name: "Лобанова Василя", role: "Отв. за брак" }
+      ]},
+      { n: 10, title: "№10 · Антипино", people: [
+        { name: "Никитина Юлия", role: "СПК / отв. за брак" }
+      ]},
+      { n: 12, title: "№12 · Чайка", people: [
+        { name: "Григорьева Мария", role: "СПК" }
+      ]},
+      { n: 18, title: "№18 · Решетникова", people: [
+        { name: "Бастриков Александр", role: "Отв. за брак" }
+      ]},
+      { n: 22, title: "№22 · Ворошилова", people: [
+        { name: "Садыков Манорбек", role: "Отв. за брак" }
+      ]},
+      { n: 27, title: "№27 · Ембаево", people: [
+        { name: "Смирнов Александр", role: "СПК" },
+        { name: "Вакарин Никита", role: "СПК" },
+        { name: "Кулушева Альбина", role: "Отв. за брак" }
+      ]},
+      { n: 29, title: "№29 · Утятская", people: [
+        { name: "Колегов Сергей", role: "СПК" },
+        { name: "Кубасов Руслан", role: "Отв. за брак" }
+      ]}
+    ];
+
+    function card(p, cls) {
+      const date = p.date ? ` · ${p.date}` : "";
+      const note = p.note ? `<p class="meta">${p.note}</p>` : "";
+      return `<article class="card ${cls}">
+        <p class="name">${p.name}</p>
+        <p class="meta">${p.store} · ${p.role}</p>
+        ${note}
+        <span class="score">${p.score}</span>
+        <span class="badge">${p.who}${date}</span>
+      </article>`;
+    }
+
+    document.getElementById("passed").innerHTML = PASSED.map((p) => card(p, "pass")).join("");
+    document.getElementById("low").innerHTML = LOW.map((p) => card(p, "warn")).join("");
+
+    function renderStores(list) {
+      return list.map((s) => {
+        const hay = (s.title + " " + s.people.map((p) => p.name + " " + p.role).join(" ")).toLowerCase();
+        return `<section class="store" data-hay="${hay}">
+          <div class="store-h"><b>${s.title}</b><span>${s.people.length}</span></div>
+          <div class="names">${s.people.map((p) => `<span>${p.name} · ${p.role}</span>`).join("")}</div>
+        </section>`;
+      }).join("");
+    }
+
+    const missCount = STORES.reduce((n, s) => n + s.people.length, 0);
+    document.getElementById("pass-count").textContent = String(PASSED.length);
+    document.getElementById("low-count").textContent = String(LOW.length);
+    document.getElementById("miss-count").textContent = String(missCount);
+    document.getElementById("missed").innerHTML = renderStores(STORES);
+
+    document.getElementById("q").addEventListener("input", (e) => {
+      const q = e.target.value.trim().toLowerCase();
+      document.querySelectorAll(".store").forEach((el) => {
+        el.classList.toggle("hidden", q && !el.dataset.hay.includes(q));
+      });
+    });
+  </script>
+</body>
+</html>

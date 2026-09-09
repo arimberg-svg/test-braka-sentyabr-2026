@@ -1,0 +1,8 @@
+Gmail*.pdf
+*.eml
+_word_dump.txt
+*.docx
+Тест по браку*.pdf
+Thumbs.db
+.DS_Store
+~$*
