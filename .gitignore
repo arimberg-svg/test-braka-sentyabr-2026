@@ -1,6 +1,7 @@
 Gmail*.pdf
 *.eml
 _word_dump.txt
+_*.txt
 *.docx
 Тест по браку*.pdf
 Thumbs.db

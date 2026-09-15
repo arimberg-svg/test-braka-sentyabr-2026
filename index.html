@@ -32,6 +32,7 @@
       --warn-bg: #fdecee;
       --warn-line: #f3b4bd;
       --line: rgba(66, 8, 168, 0.16);
+      --insight: #fffaf4;
       --font: "Manrope", "Segoe UI", sans-serif;
       --display: "Geologica", "Manrope", sans-serif;
     }
@@ -258,17 +259,83 @@
       background: var(--orange); color: #fff; border: 0;
       padding: 9px 14px; border-radius: 999px; cursor: pointer;
     }
+    .insights {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 12px;
+      margin: 0 0 22px;
+    }
+    .insight {
+      background: var(--insight);
+      border: 1px solid var(--ok-line);
+      border-radius: 18px;
+      padding: 16px 18px 14px;
+    }
+    .insight.purple {
+      background: #f7f2ff;
+      border-color: var(--bad-line);
+    }
+    .insight h3 {
+      margin: 0 0 4px;
+      font-family: var(--display);
+      font-size: 16px;
+      letter-spacing: -.02em;
+    }
+    .insight .cap {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .err {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 10px;
+      align-items: start;
+      margin: 0 0 12px;
+    }
+    .err:last-child { margin-bottom: 0; }
+    .err .n {
+      font-family: var(--display);
+      font-size: 22px;
+      color: var(--orange);
+      line-height: 1;
+      padding-top: 2px;
+    }
+    .err .t { font-size: 13px; font-weight: 750; }
+    .err .d { font-size: 12px; color: var(--muted); font-weight: 650; margin-top: 2px; }
+    .bar {
+      height: 6px; margin-top: 6px;
+      background: rgba(66, 8, 168, .1);
+      border-radius: 99px; overflow: hidden;
+    }
+    .bar i {
+      display: block; height: 100%;
+      background: var(--orange);
+      border-radius: 99px;
+    }
+    .best-row {
+      display: flex; justify-content: space-between; gap: 8px;
+      align-items: baseline;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px; font-weight: 750;
+    }
+    .best-row:last-child { border-bottom: 0; }
+    .best-row span { color: var(--muted); font-size: 12px; }
+    .best-row b { color: var(--orange-deep); font-family: var(--display); }
     @media (max-width: 720px) {
       .hero, .body { padding-left: 18px; padding-right: 18px; }
       .stats { grid-template-columns: 1fr 1fr; }
       .chip { display: none; }
+      .insights { grid-template-columns: 1fr; }
     }
     @media print {
       .glow, .print-btn, .toolbar { display: none !important; }
       body { background: #fff; }
       .page { width: auto; margin: 0; padding: 0; }
       .postcard { box-shadow: none; border: 0; border-radius: 0; }
-      .hero, .card, .motivate, .stats article, .store, .names span, .note {
+      .hero, .card, .motivate, .stats article, .store, .names span, .note, .insight {
         -webkit-print-color-adjust: exact; print-color-adjust: exact;
       }
     }
@@ -283,12 +350,12 @@
           <div class="brand">
             <img src="assets/logo.png" alt="У Михалыча" />
           </div>
-          <span class="chip">Норма 25 / 31</span>
+          <span class="chip">обновлено 15.09.2026</span>
         </div>
         <h1>Тест по браку:<br />кто сдал — и кому ещё надо</h1>
         <p>
-          Сверка со списком СПК и ответственных за брак на 02.09.2026.
-          На карточке — балл из 31 и дата прохождения, если она известна.
+          Сверка со списком СПК и ответственных за брак. На карточке — балл из 31
+          и дата прохождения. Норма — 25 из 31.
         </p>
         <div class="links">
           <a href="https://arimberg-svg.github.io/brak-test/">Сдать тест →</a>
@@ -300,10 +367,55 @@
         <article class="ok"><b id="pass-count">0</b><span>сдали (норма 25/31)</span></article>
         <article class="warn"><b id="low-count">0</b><span>сдали, но ниже нормы</span></article>
         <article class="bad"><b id="miss-count">0</b><span>не сдавали совсем</span></article>
-        <article class="p"><b>31</b><span>вопрос в тесте</span></article>
+        <article class="p"><b>15.09</b><span>последнее обновление</span></article>
       </div>
 
       <div class="body">
+        <div class="section-head">
+          <h2>Результаты</h2>
+          <p>Кто сдал лучше всех и какие ошибки повторяются чаще</p>
+        </div>
+        <div class="insights">
+          <section class="insight">
+            <h3>Частые ошибки</h3>
+            <p class="cap">По разборам результатов, где видны конкретные ответы</p>
+            <div class="err">
+              <div class="n">1</div>
+              <div>
+                <div class="t">Списание предпродажного брака</div>
+                <div class="d">Вопрос 19. Верно: через ВП «Бой/лом» или «Брак» самостоятельно, без согласования. Чаще всего выбирают «после согласования со специалистом».</div>
+                <div class="bar" aria-hidden="true"><i style="width:100%"></i></div>
+              </div>
+            </div>
+            <div class="err">
+              <div class="n">2</div>
+              <div>
+                <div class="t">Заявление клиента — три оригинала</div>
+                <div class="d">Вопрос 15. Верно: три оригинала — клиенту, в магазин и в сервис. Часто оставляют один оригинал в магазине, а остальным отдают копии.</div>
+                <div class="bar" aria-hidden="true"><i style="width:43%"></i></div>
+              </div>
+            </div>
+            <div class="err">
+              <div class="n">3</div>
+              <div>
+                <div class="t">Статус акта и отказ в гарантии</div>
+                <div class="d">Вопрос 23: в работу берётся только статус «Отправлено на согласование менеджеру по браку», не «Новый». Вопрос 29: отказ в гарантии — по заключению АСЦ, не старшим на кассе.</div>
+                <div class="bar" aria-hidden="true"><i style="width:29%"></i></div>
+              </div>
+            </div>
+          </section>
+          <section class="insight purple">
+            <h3>Кто прошёл лучше всех</h3>
+            <p class="cap">Норма 25 из 31 · максимум 31</p>
+            <div class="best-row"><b>31/31</b> <span>Абушева Яна · Дружбы · 15.09</span></div>
+            <div class="best-row"><b>31/31</b> <span>Юрлова Ксения · Перевалово</span></div>
+            <div class="best-row"><b>31/31</b> <span>Кондратьева Ирина · Ворошилова</span></div>
+            <div class="best-row"><b>31/31</b> <span>Строкина Дарья · Республики / Мальково</span></div>
+            <div class="best-row"><b>30/31</b> <span>Никитина, Булатов, Котков, Бастриков · 15.09</span></div>
+            <div class="best-row"><b>30/31</b> <span>Одинцов · 31.08 · Бучельников, Ключка, Бергер, Шушарина, Кожевникова</span></div>
+          </section>
+        </div>
+
         <div class="section-head">
           <h2 style="color:#c45e0a">Сдали</h2>
           <p>Оранжевые — набрали 25 и выше</p>
@@ -320,7 +432,7 @@
           <h2>Вас нет среди сдавших — это очень жаль</h2>
           <p>
             Тест по браку нужен тем, кто принимает товар и ведёт акты: СПК и ответственным за брак.
-            Ниже — фамилии из списка на 02.09.2026, кого нет среди сдавших совсем.
+            Ниже — СПК и ответственные за брак, кого до сих пор нет среди сдавших.
             Надо всё-таки сдать: это про деньги клиента, акты и ваш магазин.
           </p>
           <a href="https://arimberg-svg.github.io/brak-test/">Сдать тест по браку →</a>
@@ -350,24 +462,36 @@
 
   <script>
     const PASSED = [
+      { name: "Абушева Яна", store: "№1 · Дружбы 66", role: "СПК", score: "31/31", date: "15.09.2026", who: "Сдала" },
       { name: "Юрлова Ксения", store: "№20 · Перевалово", role: "СПК", score: "31/31", date: "", who: "Сдала" },
       { name: "Кондратьева Ирина", store: "№22 · Ворошилова", role: "СПК", score: "31/31", date: "", who: "Сдала" },
       { name: "Строкина Дарья", store: "№3 · Республики / №24 · Мальково", role: "СПК", score: "31/31", date: "", who: "Сдала" },
+      { name: "Никитина Юлия", store: "№10 · Антипино", role: "СПК / отв. за брак", score: "30/31", date: "15.09.2026", who: "Сдала" },
+      { name: "Булатов Артём", store: "№7 · Ожогино", role: "СПК / отв. за брак", score: "30/31", date: "15.09.2026", who: "Сдал" },
+      { name: "Котков Сергей", store: "№1 · Дружбы 66", role: "Отв. за брак", score: "30/31", date: "15.09.2026", who: "Сдал" },
+      { name: "Бастриков Александр", store: "№18 · Решетникова", role: "Отв. за брак", score: "30/31", date: "15.09.2026", who: "Сдал" },
       { name: "Одинцов Максим", store: "№11 · Березняки", role: "СПК", score: "30/31", date: "31.08.2026", who: "Сдал" },
       { name: "Бучельников Алексей", store: "№9 · Червишево", role: "СПК", score: "30/31", date: "", who: "Сдал" },
       { name: "Ключка Евгений", store: "№17 · Луговое", role: "СПК", score: "30/31", date: "", who: "Сдал" },
       { name: "Бергер Леонид", store: "№11 · Березняки", role: "СПК / отв. за брак", score: "30/31", date: "", who: "Сдал" },
       { name: "Шушарина Ольга", store: "№17 · Луговое", role: "Отв. за брак", score: "30/31", date: "", who: "Сдала" },
       { name: "Кожевникова Ольга", store: "№15 · МСК 6 км", role: "Отв. за брак", score: "30/31", date: "", who: "Сдала" },
+      { name: "Кулушева Альбина", store: "№27 · Ембаево", role: "Отв. за брак", score: "29/31", date: "15.09.2026", who: "Сдала" },
+      { name: "Вакарин Никита", store: "№27 · Ембаево", role: "СПК", score: "29/31", date: "15.09.2026", who: "Сдал" },
+      { name: "Кубасов Руслан", store: "№29 · Утятская", role: "Отв. за брак", score: "29/31", date: "14.09.2026", who: "Сдал" },
+      { name: "Козлов Александр", store: "№7 · Ожогино", role: "СПК", score: "29/31", date: "15.09.2026", who: "Сдал", note: "не в списке СПК / отв. за брак" },
+      { name: "Зырянова Марина", store: "№29 · Утятская", role: "Продавец-консультант", score: "29/31", date: "15.09.2026", who: "Сдала", note: "не в списке СПК / отв. за брак" },
       { name: "Егорова Ирина", store: "№20 · Перевалово", role: "СПК", score: "29/31", date: "02.09.2026", who: "Сдала" },
       { name: "Лаговщина Ирина", store: "№14 · Боровский", role: "СПК", score: "29/31", date: "", who: "Сдала" },
       { name: "Кочкуркин Никита", store: "№15 · МСК 6 км", role: "СПК", score: "29/31", date: "", who: "Сдал" },
       { name: "Сердцова Мария", store: "№19 · Тюнёво", role: "СПК", score: "29/31", date: "", who: "Сдала" },
       { name: "Никифоров Евгений", store: "№12 · Чайка", role: "СПК / отв. за брак", score: "29/31", date: "", who: "Сдал" },
       { name: "Безуглов Иван", store: "№6 · Сантехника", role: "Отв. за брак", score: "29/31", date: "", who: "Сдал" },
+      { name: "Егоров Эдуард", store: "№7 · Ожогино", role: "СПК", score: "28/31", date: "15.09.2026", who: "Сдал", note: "не в списке СПК / отв. за брак" },
       { name: "Пузырёва Екатерина", store: "№19 · Тюнёво", role: "Отв. за брак", score: "28/31", date: "", who: "Сдала" },
       { name: "Гитлайн Евгения", store: "№13 · Винзили", role: "СПК", score: "28/31", date: "", who: "Сдала" },
       { name: "Окуньков Алексей", store: "№26 · Омская", role: "СПК / отв. за брак", score: "28/31", date: "", who: "Сдал" },
+      { name: "Топорищев Александр", store: "№9 · Червишево", role: "СПК", score: "27/31", date: "15.09.2026", who: "Сдал" },
       { name: "Узкоглазова Мария", store: "№12 · Чайка", role: "Кассир", score: "27/31", date: "31.08.2026", who: "Сдала", note: "не в списке СПК / отв. за брак" },
       { name: "Вяткин Александр", store: "№28 · Талица", role: "СПК", score: "27/31", date: "", who: "Сдал" },
       { name: "Сидоров Максим", store: "№28 · Талица", role: "СПК", score: "27/31", date: "", who: "Сдал" },
@@ -375,6 +499,7 @@
       { name: "Сарана Олег", store: "№15 · МСК 6 км", role: "СПК", score: "27/31", date: "", who: "Сдал" },
       { name: "Варлаков Данил", store: "№13 · Винзили", role: "Отв. за брак", score: "27/31", date: "", who: "Сдал" },
       { name: "Мустюлёв Максим", store: "№3 · Республики", role: "Отв. за брак", score: "27/31", date: "", who: "Сдал" },
+      { name: "Диденко Любовь", store: "№1 · Дружбы 66", role: "Отв. за брак", score: "26/31", date: "15.09.2026", who: "Сдала" },
       { name: "Белкина Наталья", store: "№14 · Боровский", role: "Отв. за брак", score: "26/31", date: "", who: "Сдала" },
       { name: "Гольнев Сергей", store: "№24 · Мальково", role: "Отв. за брак", score: "26/31", date: "", who: "Сдал" },
       { name: "Измайлов Иван", store: "№28 · Талица", role: "Отв. за брак", score: "26/31", date: "", who: "Сдал" },
@@ -388,38 +513,18 @@
     ];
 
     const STORES = [
-      { n: 1, title: "№1 · Дружбы 66", people: [
-        { name: "Абушева Яна", role: "СПК" },
-        { name: "Котков Сергей", role: "Отв. за брак" },
-        { name: "Диденко Любовь", role: "Отв. за брак" }
-      ]},
       { n: 2, title: "№2 · Авторемонтная", people: [
         { name: "Умарова Евдокия", role: "СПК" },
         { name: "Кривенко Дмитрий", role: "Отв. за брак" }
       ]},
-      { n: 7, title: "№7 · Ожогино", people: [
-        { name: "Булатов Артём", role: "СПК / отв. за брак" }
-      ]},
       { n: 9, title: "№9 · Червишево", people: [
-        { name: "Топорищев Александр", role: "СПК" },
         { name: "Лобанова Василя", role: "Отв. за брак" }
-      ]},
-      { n: 10, title: "№10 · Антипино", people: [
-        { name: "Никитина Юлия", role: "СПК / отв. за брак" }
       ]},
       { n: 12, title: "№12 · Чайка", people: [
         { name: "Григорьева Мария", role: "СПК" }
       ]},
-      { n: 18, title: "№18 · Решетникова", people: [
-        { name: "Бастриков Александр", role: "Отв. за брак" }
-      ]},
       { n: 27, title: "№27 · Ембаево", people: [
-        { name: "Смирнов Александр", role: "СПК" },
-        { name: "Вакарин Никита", role: "СПК" },
-        { name: "Кулушева Альбина", role: "Отв. за брак" }
-      ]},
-      { n: 29, title: "№29 · Утятская", people: [
-        { name: "Кубасов Руслан", role: "Отв. за брак" }
+        { name: "Смирнов Александр", role: "СПК" }
       ]}
     ];
 
