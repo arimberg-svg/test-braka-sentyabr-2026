@@ -261,9 +261,10 @@
     }
     .insights {
       display: grid;
-      grid-template-columns: 1.35fr .75fr;
+      grid-template-columns: 1.15fr 1fr;
       gap: 12px;
       margin: 0 0 22px;
+      align-items: stretch;
     }
     .insight {
       background: var(--insight);
@@ -274,6 +275,8 @@
     .insight.purple {
       background: #f7f2ff;
       border-color: var(--bad-line);
+      display: flex;
+      flex-direction: column;
     }
     .insight h3 {
       margin: 0 0 4px;
@@ -316,16 +319,45 @@
       background: var(--orange);
       border-radius: 99px;
     }
+    .best-list {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 0;
+    }
     .best-row {
-      display: flex; justify-content: space-between; gap: 8px;
-      align-items: baseline;
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 6px 10px;
+      align-items: start;
       padding: 7px 0;
       border-bottom: 1px solid var(--line);
-      font-size: 13px; font-weight: 750;
     }
     .best-row:last-child { border-bottom: 0; }
-    .best-row span { color: var(--muted); font-size: 12px; }
-    .best-row b { color: var(--orange-deep); font-family: var(--display); }
+    .best-row b {
+      color: var(--orange-deep);
+      font-family: var(--display);
+      font-size: 15px;
+      line-height: 1.35;
+      padding-top: 1px;
+    }
+    .best-names {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 5px 6px;
+    }
+    .best-names span {
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.3;
+      background: #fff;
+      border: 1px solid var(--bad-line);
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
     @media (max-width: 720px) {
       .hero, .body { padding-left: 18px; padding-right: 18px; }
       .stats { grid-template-columns: 1fr 1fr; }
@@ -337,7 +369,7 @@
       body { background: #fff; }
       .page { width: auto; margin: 0; padding: 0; }
       .postcard { box-shadow: none; border: 0; border-radius: 0; }
-      .hero, .card, .motivate, .stats article, .store, .names span, .note, .insight {
+      .hero, .card, .motivate, .stats article, .store, .names span, .note, .insight, .best-names span {
         -webkit-print-color-adjust: exact; print-color-adjust: exact;
       }
     }
@@ -375,7 +407,7 @@
       <div class="body">
         <div class="section-head">
           <h2>Результаты</h2>
-          <p>Топ-10 ошибок и кто сдал лучше всех</p>
+          <p>Топ-10 ошибок и результаты по баллам</p>
         </div>
         <div class="insights">
           <section class="insight">
@@ -474,17 +506,51 @@
           </section>
           <section class="insight purple">
             <h3>Кто прошёл лучше всех</h3>
-            <p class="cap">Топ-10 по баллу · норма 25 из 31</p>
-            <div class="best-row"><b>31/31</b> <span>Абушева Яна · Дружбы</span></div>
-            <div class="best-row"><b>31/31</b> <span>Юрлова Ксения · Перевалово</span></div>
-            <div class="best-row"><b>31/31</b> <span>Кондратьева Ирина · Ворошилова</span></div>
-            <div class="best-row"><b>31/31</b> <span>Строкина Дарья · Республики / Мальково</span></div>
-            <div class="best-row"><b>30/31</b> <span>Никитина, Булатов, Котков, Бастриков</span></div>
-            <div class="best-row"><b>30/31</b> <span>Одинцов, Бучельников, Ключка, Бергер, Шушарина, Кожевникова</span></div>
-            <div class="best-row"><b>29/31</b> <span>Кулушева, Вакарин, Кубасов</span></div>
-            <div class="best-row"><b>29/31</b> <span>Козлов, Зырянова, Егорова</span></div>
-            <div class="best-row"><b>29/31</b> <span>Лаговщина, Кочкуркин, Сердцова</span></div>
-            <div class="best-row"><b>29/31</b> <span>Никифоров, Безуглов, Лобанова</span></div>
+            <p class="cap">Все сдавшие по баллу · норма 25 из 31</p>
+            <div class="best-list">
+              <div class="best-row">
+                <b>31/31</b>
+                <div class="best-names">
+                  <span>Абушева Яна</span><span>Юрлова Ксения</span><span>Кондратьева Ирина</span><span>Строкина Дарья</span>
+                </div>
+              </div>
+              <div class="best-row">
+                <b>30/31</b>
+                <div class="best-names">
+                  <span>Никитина Юлия</span><span>Булатов Артём</span><span>Котков Сергей</span><span>Бастриков Александр</span><span>Одинцов Максим</span><span>Бучельников Алексей</span><span>Ключка Евгений</span><span>Бергер Леонид</span><span>Шушарина Ольга</span><span>Кожевникова Ольга</span>
+                </div>
+              </div>
+              <div class="best-row">
+                <b>29/31</b>
+                <div class="best-names">
+                  <span>Кулушева Альбина</span><span>Вакарин Никита</span><span>Кубасов Руслан</span><span>Козлов Александр</span><span>Зырянова Марина</span><span>Егорова Ирина</span><span>Лаговщина Ирина</span><span>Кочкуркин Никита</span><span>Сердцова Мария</span><span>Никифоров Евгений</span><span>Безуглов Иван</span><span>Лобанова Василя</span>
+                </div>
+              </div>
+              <div class="best-row">
+                <b>28/31</b>
+                <div class="best-names">
+                  <span>Егоров Эдуард</span><span>Пузырёва Екатерина</span><span>Гитлайн Евгения</span><span>Окуньков Алексей</span>
+                </div>
+              </div>
+              <div class="best-row">
+                <b>27/31</b>
+                <div class="best-names">
+                  <span>Топорищев Александр</span><span>Узкоглазова Мария</span><span>Вяткин Александр</span><span>Сидоров Максим</span><span>Головин Евгений</span><span>Сарана Олег</span><span>Варлаков Данил</span><span>Мустюлёв Максим</span>
+                </div>
+              </div>
+              <div class="best-row">
+                <b>26/31</b>
+                <div class="best-names">
+                  <span>Диденко Любовь</span><span>Белкина Наталья</span><span>Гольнев Сергей</span><span>Измайлов Иван</span>
+                </div>
+              </div>
+              <div class="best-row">
+                <b>25/31</b>
+                <div class="best-names">
+                  <span>Бандуровский Руслан</span>
+                </div>
+              </div>
+            </div>
           </section>
         </div>
 
