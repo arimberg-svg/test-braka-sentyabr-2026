@@ -133,8 +133,8 @@
     }
     .stats span { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; font-weight: 700; }
     .stats .ok b { color: var(--orange); }
-    .stats .bad b { color: var(--p); }
-    .stats .warn b { color: var(--warn); }
+    .stats .bad b { color: var(--warn); }
+    .stats .warn b { color: var(--p); }
     .stats .p b { color: var(--p); }
     .body { padding: 26px 28px 32px; }
     .section-head {
@@ -163,9 +163,9 @@
       color: var(--ok-deep);
     }
     .card.warn {
-      background: var(--warn-bg);
-      border: 1px solid var(--warn-line);
-      color: var(--warn-deep);
+      background: var(--bad-bg);
+      border: 1px solid var(--bad-line);
+      color: var(--bad-deep);
     }
     .card .name {
       font-family: var(--display);
@@ -182,15 +182,15 @@
       border: 1px solid var(--ok-line);
     }
     .card.warn .score {
-      color: var(--warn);
-      border-color: var(--warn-line);
+      color: var(--p);
+      border-color: var(--bad-line);
     }
     .card .badge {
       display: inline-flex; margin-top: 8px;
       font-size: 11px; font-weight: 800; letter-spacing: .06em;
       text-transform: uppercase; color: var(--orange);
     }
-    .card.warn .badge { color: var(--warn); }
+    .card.warn .badge { color: var(--p); }
     .note {
       margin: 0 0 16px;
       background: #fff8f0;
@@ -202,7 +202,7 @@
     }
     .motivate {
       margin: 8px 0 16px;
-      background: linear-gradient(135deg, #4208a8 0%, #5b21d6 58%, #7a3cff 100%);
+      background: linear-gradient(135deg, #c81e3a 0%, #9b1530 58%, #e11d48 100%);
       color: #fff;
       border-radius: 18px;
       padding: 18px 20px;
@@ -213,7 +213,7 @@
     .motivate p { margin: 0; font-weight: 600; font-size: 14.5px; line-height: 1.5; max-width: 74ch; }
     .motivate a {
       display: inline-block; margin-top: 12px;
-      background: #fff; color: var(--p);
+      background: #fff; color: var(--warn-deep);
       font-weight: 800; font-size: 13px;
       padding: 9px 14px; border-radius: 999px;
       text-decoration: none;
@@ -228,8 +228,8 @@
     }
     .store {
       margin: 0 0 12px;
-      border: 1px solid var(--bad-line);
-      background: var(--bad-bg);
+      border: 1px solid var(--warn-line);
+      background: var(--warn-bg);
       border-radius: 16px;
       padding: 12px 14px 10px;
     }
@@ -238,13 +238,13 @@
       display: flex; justify-content: space-between; gap: 10px; align-items: baseline;
       margin-bottom: 8px;
     }
-    .store-h b { font-family: var(--display); font-size: 15px; color: var(--bad-deep); }
-    .store-h span { font-size: 12px; font-weight: 800; color: var(--p); }
+    .store-h b { font-family: var(--display); font-size: 15px; color: var(--warn-deep); }
+    .store-h span { font-size: 12px; font-weight: 800; color: var(--warn); }
     .names { display: flex; flex-wrap: wrap; gap: 6px; }
     .names span {
       background: #fff;
-      border: 1px solid var(--bad-line);
-      color: var(--bad-deep);
+      border: 1px solid var(--warn-line);
+      color: var(--warn-deep);
       font-size: 13px; font-weight: 750;
       padding: 5px 9px; border-radius: 999px;
     }
@@ -561,8 +561,8 @@
         <div id="passed" class="grid"></div>
 
         <div class="section-head" style="margin-top:28px">
-          <h2 style="color:#c81e3a">Сдали, но не набрали норму</h2>
-          <p>Балл ниже 25 из 31</p>
+          <h2 style="color:#4208a8">Сдали, но не набрали норму</h2>
+          <p>Фиолетовые — балл ниже 25 из 31</p>
         </div>
         <div id="low" class="grid"></div>
 
@@ -577,8 +577,8 @@
         </div>
 
         <div class="section-head">
-          <h2 style="color:#4208a8">Не сдавали совсем</h2>
-          <p>Фиолетовые — СПК и ответственные за брак, кого нет в результатах</p>
+          <h2 style="color:#c81e3a">Не сдавали совсем</h2>
+          <p>Красные — СПК и ответственные за брак, кого нет в результатах</p>
         </div>
         <div class="toolbar">
           <input id="q" type="search" placeholder="Поиск по фамилии или магазину…" autocomplete="off" />
