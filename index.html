@@ -261,7 +261,7 @@
     }
     .insights {
       display: grid;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns: 1.35fr .75fr;
       gap: 12px;
       margin: 0 0 22px;
     }
@@ -289,21 +289,23 @@
     }
     .err {
       display: grid;
-      grid-template-columns: 44px 1fr;
-      gap: 10px;
+      grid-template-columns: 28px 1fr 28px;
+      gap: 8px;
       align-items: start;
-      margin: 0 0 12px;
+      margin: 0 0 9px;
     }
     .err:last-child { margin-bottom: 0; }
-    .err .n {
+    .err .n, .err .cnt {
       font-family: var(--display);
-      font-size: 22px;
+      font-size: 16px;
       color: var(--orange);
-      line-height: 1;
-      padding-top: 2px;
+      line-height: 1.15;
+      padding-top: 1px;
     }
+    .err .cnt { text-align: right; color: var(--orange-deep); }
     .err .t { font-size: 13px; font-weight: 750; }
-    .err .d { font-size: 12px; color: var(--muted); font-weight: 650; margin-top: 2px; }
+    .err .t .q { color: var(--muted); font-weight: 650; font-size: 11px; }
+    .err .d { font-size: 12px; color: var(--muted); font-weight: 650; margin-top: 1px; }
     .bar {
       height: 6px; margin-top: 6px;
       background: rgba(66, 8, 168, .1);
@@ -373,35 +375,101 @@
       <div class="body">
         <div class="section-head">
           <h2>Результаты</h2>
-          <p>Кто сдал лучше всех и какие ошибки повторяются чаще</p>
+          <p>Топ-10 ошибок и кто сдал лучше всех</p>
         </div>
         <div class="insights">
           <section class="insight">
-            <h3>Частые ошибки</h3>
-            <p class="cap">По разборам результатов, где видны конкретные ответы</p>
+            <h3>Топ-10 ошибок</h3>
+            <p class="cap">По разборам лучших попыток, где видны ответы · справа — сколько раз ошиблись</p>
             <div class="err">
               <div class="n">1</div>
               <div>
-                <div class="t">Списание предпродажного брака</div>
-                <div class="d">Вопрос 19. Верно: через ВП «Бой/лом» или «Брак» самостоятельно, без согласования. Чаще всего выбирают «после согласования со специалистом».</div>
+                <div class="t">Списание предпродажного брака <span class="q">вопрос 19</span></div>
+                <div class="d">Верно: через ВП «Бой/лом» или «Брак» самостоятельно, без согласования. Часто выбирают согласование со специалистом.</div>
                 <div class="bar" aria-hidden="true"><i style="width:100%"></i></div>
               </div>
+              <div class="cnt">7</div>
             </div>
             <div class="err">
               <div class="n">2</div>
               <div>
-                <div class="t">Заявление клиента — три оригинала</div>
-                <div class="d">Вопрос 15. Верно: три оригинала — клиенту, в магазин и в сервис. Часто оставляют один оригинал в магазине, а остальным отдают копии.</div>
+                <div class="t">Заявление клиента — три оригинала <span class="q">вопрос 15</span></div>
+                <div class="d">Верно: три оригинала — клиенту, в магазин и в сервис. Не копии.</div>
                 <div class="bar" aria-hidden="true"><i style="width:43%"></i></div>
               </div>
+              <div class="cnt">3</div>
             </div>
             <div class="err">
               <div class="n">3</div>
               <div>
-                <div class="t">Статус акта и отказ в гарантии</div>
-                <div class="d">Вопрос 23: в работу берётся только статус «Отправлено на согласование менеджеру по браку», не «Новый». Вопрос 29: отказ в гарантии — по заключению АСЦ, не старшим на кассе.</div>
+                <div class="t">Статус акта брака <span class="q">вопрос 23</span></div>
+                <div class="d">В работу берётся только «Отправлено на согласование менеджеру по браку», не «Новый».</div>
                 <div class="bar" aria-hidden="true"><i style="width:29%"></i></div>
               </div>
+              <div class="cnt">2</div>
+            </div>
+            <div class="err">
+              <div class="n">4</div>
+              <div>
+                <div class="t">Отказ в гарантии <span class="q">вопрос 29</span></div>
+                <div class="d">Решение — по заключению АСЦ, не старшим на кассе при приёмке.</div>
+                <div class="bar" aria-hidden="true"><i style="width:29%"></i></div>
+              </div>
+              <div class="cnt">2</div>
+            </div>
+            <div class="err">
+              <div class="n">5</div>
+              <div>
+                <div class="t">Оригиналы акта АСЦ до выплаты <span class="q">вопрос 24</span></div>
+                <div class="d">Копии оставить себе, оригиналы вернуть покупателю — до момента выплаты.</div>
+                <div class="bar" aria-hidden="true"><i style="width:14%"></i></div>
+              </div>
+              <div class="cnt">1</div>
+            </div>
+            <div class="err">
+              <div class="n">6</div>
+              <div>
+                <div class="t">Насос дешевле 2000 ₽ <span class="q">вопрос 9</span></div>
+                <div class="d">Насосы — исключение: на брак принимаем, даже если закупочная ниже 2000 ₽.</div>
+                <div class="bar" aria-hidden="true"><i style="width:14%"></i></div>
+              </div>
+              <div class="cnt">1</div>
+            </div>
+            <div class="err">
+              <div class="n">7</div>
+              <div>
+                <div class="t">Нет чека и гарантийного талона <span class="q">вопрос 2</span></div>
+                <div class="d">Отсутствие чека или талона — не основание отказать в приёмке (п. 5 ст. 18 ЗоЗПП).</div>
+                <div class="bar" aria-hidden="true"><i style="width:14%"></i></div>
+              </div>
+              <div class="cnt">1</div>
+            </div>
+            <div class="err">
+              <div class="n">8</div>
+              <div>
+                <div class="t">Логистика из Тюмени <span class="q">вопрос 4</span></div>
+                <div class="d">На склад брака — только круговыми; в сторонний СЦ — Ларгусом.</div>
+                <div class="bar" aria-hidden="true"><i style="width:14%"></i></div>
+              </div>
+              <div class="cnt">1</div>
+            </div>
+            <div class="err">
+              <div class="n">9</div>
+              <div>
+                <div class="t">Возврат надлежащего качества <span class="q">вопрос 8</span></div>
+                <div class="d">Если товарный вид утерян, возврат денег не производится (ст. 25 ЗоЗПП). Это не брак.</div>
+                <div class="bar" aria-hidden="true"><i style="width:14%"></i></div>
+              </div>
+              <div class="cnt">1</div>
+            </div>
+            <div class="err">
+              <div class="n">10</div>
+              <div>
+                <div class="t">Не забрали после ремонта <span class="q">вопрос 11</span></div>
+                <div class="d">Больше двух месяцев после уведомления — продавец вправе продать товар без компенсации (ст. 899 ГК РФ).</div>
+                <div class="bar" aria-hidden="true"><i style="width:14%"></i></div>
+              </div>
+              <div class="cnt">1</div>
             </div>
           </section>
           <section class="insight purple">
